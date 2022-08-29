@@ -55,6 +55,44 @@ int add(struct Polynomial P1[], struct Polynomial P2[], struct Polynomial P3[], 
     }
     return k;
 }
+int multiply(struct Polynomial P1[], struct Polynomial P2[], struct Polynomial P3[], int h1, int h2)
+{
+    int next3, j, k, i, flag;
+    int ex, co;
+    i = next3 = 0;
+    while (i < h1)
+    {
+        j = 0;
+        while (j < h2)
+        {
+            ex = P1[i].exp + P2[j].exp;
+            co = P1[i].coeff * P2[j].coeff;
+            k = flag = 0;
+            while (k < next3 && !flag)
+            {
+                if (P3[k].exp == ex)
+                {
+                    flag = 1;
+                    break;
+                }
+                else
+                    k++;
+            }
+
+            if (flag == 1)
+                P3[k].coeff = P3[k].coeff + co;
+            else
+            {
+                P3[next3].exp = ex;
+                P3[next3].coeff = co;
+                next3++;
+            }
+            j++;
+        }
+        i++;
+    }
+    return next3;
+}
 int main()
 {
     struct Polynomial P1[10], P2[10], P3[10];
@@ -72,7 +110,7 @@ int main()
         cin >> P1[i].coeff;
     }
     cout << "For Polynomial 2" << endl;
-    for (i = 0; i <h1; i++)
+    for (i = 0; i < h1; i++)
     {
         cout << "Enter exponent : " << endl;
         cin >> P2[i].exp;
@@ -80,8 +118,14 @@ int main()
         cin >> P2[i].coeff;
     }
     int t = add(P1, P2, P3, h1, h2);
-    cout << "Resultant Polynomial: " << endl;
+    cout << "Resultant Polynomial Sum: " << endl;
     for (int i = 0; i < t; i++)
+    {
+        cout << "Exp:" << P3[i].exp << "  Co-eff:" << P3[i].coeff << endl;
+    }
+    int p = multiply(P1, P2, P3, h1, h2);
+    cout << "Resultant Polynomial Sum: " << endl;
+    for (int i = 0; i < p; i++)
     {
         cout << "Exp:" << P3[i].exp << "  Co-eff:" << P3[i].coeff << endl;
     }
