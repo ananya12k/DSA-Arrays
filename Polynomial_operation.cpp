@@ -124,7 +124,7 @@ int main()
         cout << "Exp:" << P3[i].exp << "  Co-eff:" << P3[i].coeff << endl;
     }
     int p = multiply(P1, P2, P3, h1, h2);
-    cout << "Resultant Polynomial Sum: " << endl;
+    cout << "Resultant Polynomial product: " << endl;
     for (int i = 0; i < p; i++)
     {
         cout << "Exp:" << P3[i].exp << "  Co-eff:" << P3[i].coeff << endl;
