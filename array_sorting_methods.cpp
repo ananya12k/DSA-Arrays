@@ -38,6 +38,7 @@ void array::enter_ele()
 }
 void array::print_arr()
 {
+    cout << "\nArray elements are: " << endl;
     for (int i = 0; i < length; i++)
     {
         cout << a[i] << " ";
@@ -45,33 +46,32 @@ void array::print_arr()
 }
 int array::partition(int l, int h)
 {
-    int i = 0;
-    int j = length;
     int pivot = a[l];
+    int i = l + 1;
+    int j = h;
     do
     {
-        do
+
+        while (a[i] <= pivot)
         {
             i++;
-        } while (a[i] > pivot);
-
-        do
+        }
+        while (a[j] > pivot)
         {
             j--;
-        } while (a[j] <= pivot);
+        }
         if (i < j)
         {
             int temp = a[i];
             a[i] = a[j];
             a[j] = temp;
         }
+
     } while (i < j);
-    if (j > i)
-    {
-        int k = a[l];
-        a[l] = a[j];
-        a[j] = k;
-    }
+
+    int k = a[l];
+    a[l] = a[j];
+    a[j] = k;
 
     return j;
 }
@@ -136,8 +136,8 @@ int main()
     First.enter_ele();
     First.print_arr();
     // First.bubble_sort();
-   
-    First.quick_sort(0,( First.get_length()));
+
+    First.quick_sort(0, (First.get_length() - 1));
     First.print_arr();
 
     return 0;
