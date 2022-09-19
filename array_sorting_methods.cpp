@@ -136,7 +136,6 @@ int main()
     First.enter_ele();
     First.print_arr();
     // First.bubble_sort();
-
     First.quick_sort(0, (First.get_length() - 1));
     First.print_arr();
 
