@@ -14,14 +14,15 @@ public:
     int get_length();
     void enter_ele();
     void print_arr();
-    void bubble_sort();
+    void bubble_sort(); // all the heavy elements are sent to the back
     void insertion_sort();
-    void quick_sort(int l, int h);
-    void merge_sort();
+    int partition(int l, int h);       // Partitioning procedure
+    void quick_sort(int l, int h);     // recursive method
+    void merge(int l, int mid, int h); // 2-way merging
+    void merge_sort(int l, int h);     // recursive method
     void heap_sort();
     void count_sort();
     void wave_sort();
-    int partition(int l, int h);
     void DNF_sort();
 };
 int array::get_length()
@@ -87,7 +88,58 @@ void array::quick_sort(int l, int h)
         quick_sort(j + 1, h);
     }
 }
-
+void array::merge(int l, int mid, int h)
+{
+    int k = l;
+    int *left = new int[mid - l + 1];
+    int *right = new int[h - mid];
+    int *b = new int[length];
+    for (int p = 0; p < (mid - l + 1); p++)
+    {
+        left[p] = a[l + p];
+    }
+    for (int p = 0; p < (h - mid); p++)
+    {
+        right[p] = a[mid + 1 + p];
+    }
+    int p = 0;
+    int q = 0;
+    while ((p <= (mid - l + 1)) && (q <= (h - mid)))
+    {
+        if (left[p] < right[q])
+        {
+            b[k++] = left[p++];
+        }
+        else
+        {
+            b[k++] = right[q++];
+        }
+    }
+    for (; p <= mid; p++)
+    {
+        b[k++] = a[p++];
+    }
+    for (; q <= h; q++)
+    {
+        b[k++] = a[q++];
+    }
+    delete left;
+    delete right;
+    for (int m = l; m <= h; m++)
+    {
+        a[m] = b[m];
+    }
+}
+void array::merge_sort(int l, int h)
+{
+    if (l < h)
+    {
+        int mid = (l + h) / 2;
+        merge_sort(l, mid);
+        merge_sort(mid + 1, h);
+        merge(l, mid, h);
+    }
+}
 void array::bubble_sort()
 {
     cout << "\nBubble sorting array" << endl;
@@ -136,7 +188,8 @@ int main()
     First.enter_ele();
     First.print_arr();
     // First.bubble_sort();
-    First.quick_sort(0, (First.get_length() - 1));
+    // First.quick_sort(0, (First.get_length() - 1));
+    First.merge_sort(0, (First.get_length()));
     First.print_arr();
 
     return 0;
