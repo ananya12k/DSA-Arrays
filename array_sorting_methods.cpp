@@ -90,51 +90,39 @@ void array::quick_sort(int l, int h)
 }
 void array::merge(int l, int mid, int h)
 {
+    int *b = new int[get_length() - 1]{0};
     int k = l;
-    int *left = new int[mid - l + 1];
-    int *right = new int[h - mid];
-    int *b = new int[length];
-    for (int p = 0; p < (mid - l + 1); p++)
+    int i = l, j = mid + 1;
+    while (i <= mid && j <= h)
     {
-        left[p] = a[l + p];
-    }
-    for (int p = 0; p < (h - mid); p++)
-    {
-        right[p] = a[mid + 1 + p];
-    }
-    int p = 0;
-    int q = 0;
-    while ((p <= (mid - l + 1)) && (q <= (h - mid)))
-    {
-        if (left[p] < right[q])
+        if (a[i] < a[j])
         {
-            b[k++] = left[p++];
+            b[k++] = a[i++];
         }
-        else
+        if (a[i] > a[j])
         {
-            b[k++] = right[q++];
+            b[k++] = a[j++];
         }
     }
-    for (; p <= mid; p++)
+    while (i <= mid)
     {
-        b[k++] = a[p++];
+        b[k++] = a[i++];
     }
-    for (; q <= h; q++)
+    while (j <= h)
     {
-        b[k++] = a[q++];
+        b[k++] = a[j++];
     }
-    delete left;
-    delete right;
-    for (int m = l; m <= h; m++)
+    for (int i = 0; i < get_length(); i++)
     {
-        a[m] = b[m];
+        a[i] = b[i];
     }
 }
 void array::merge_sort(int l, int h)
 {
+    int mid;
     if (l < h)
     {
-        int mid = (l + h) / 2;
+        mid = (l + h) / 2;
         merge_sort(l, mid);
         merge_sort(mid + 1, h);
         merge(l, mid, h);
@@ -189,7 +177,7 @@ int main()
     First.print_arr();
     // First.bubble_sort();
     // First.quick_sort(0, (First.get_length() - 1));
-    First.merge_sort(0, (First.get_length()));
+    First.merge_sort(0, (First.get_length() - 1));
     First.print_arr();
 
     return 0;
