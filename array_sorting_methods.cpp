@@ -21,7 +21,8 @@ public:
     void merge(int l, int mid, int h); // 2-way merging
     void merge_sort(int l, int h);     // recursive merge sort
     void heap_sort();
-    void count_sort(); // lighter elements are brought to front
+    void selection_sort(); // lighter elements are brought to front
+    void count_sort();
     void wave_sort();
     void DNF_sort();
     void radix_sort(); // also known as bucket sort
@@ -103,7 +104,7 @@ void array::quick_sort(int l, int h)
 }
 void array::merge(int l, int mid, int h)
 {
-    int *b = new int[length]{0};
+    int *b = new int[h - l + 1];
     int k = l;
     int i = l, j = mid + 1;
     while (i <= mid && j <= h)
@@ -112,7 +113,7 @@ void array::merge(int l, int mid, int h)
         {
             b[k++] = a[i++];
         }
-        if (a[i] > a[j])
+        else
         {
             b[k++] = a[j++];
         }
@@ -125,7 +126,7 @@ void array::merge(int l, int mid, int h)
     {
         b[k++] = a[j++];
     }
-    for (int i = 0; i < length; i++)
+    for (int i = l; i <= h; i++)
     {
         a[i] = b[i];
     }
@@ -189,11 +190,11 @@ int main()
     First.enter_ele();
     cout << "Before Sorting: " << endl;
     First.print_arr();
-    cout << "After Sorting: " << endl;
+    cout << "\nAfter Sorting: " << endl;
     // First.bubble_sort();
     // First.quick_sort(0, (First.get_length() - 1));
     // First.insertion_sort();
-    // First.merge_sort(0, (First.get_length() - 1));
+    First.merge_sort(0, (First.get_length() - 1));
     First.print_arr();
 
     return 0;
