@@ -9,21 +9,22 @@ private:
     int length;
 
 public:
-    array();
-    ~array();
-    int get_length();
+    array();          // Constuctor
+    ~array();         // Destructor
+    int get_length(); // fetches the length of array
     void enter_ele();
     void print_arr();
     void bubble_sort(); // all the heavy elements are sent to the back
     void insertion_sort();
     int partition(int l, int h);       // Partitioning procedure
-    void quick_sort(int l, int h);     // recursive method
+    void quick_sort(int l, int h);     // recursive quick sort
     void merge(int l, int mid, int h); // 2-way merging
-    void merge_sort(int l, int h);     // recursive method
+    void merge_sort(int l, int h);     // recursive merge sort
     void heap_sort();
-    void count_sort();
+    void count_sort(); // lighter elements are brought to front
     void wave_sort();
     void DNF_sort();
+    void radix_sort(); // also known as bucket sort
 };
 int array::get_length()
 {
@@ -186,10 +187,12 @@ int main()
 {
     array First;
     First.enter_ele();
+    cout << "Before Sorting: " << endl;
     First.print_arr();
+    cout << "After Sorting: " << endl;
     // First.bubble_sort();
     // First.quick_sort(0, (First.get_length() - 1));
-    First.insertion_sort();
+    // First.insertion_sort();
     // First.merge_sort(0, (First.get_length() - 1));
     First.print_arr();
 
