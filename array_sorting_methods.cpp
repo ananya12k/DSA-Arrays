@@ -78,6 +78,18 @@ int array::partition(int l, int h)
 }
 void array::insertion_sort()
 {
+    int j;
+    for (int i = 1; i < length; i++)
+    {
+        j = i - 1;
+        int x = a[i];
+        while (j > -1 && a[j] > x)
+        {
+            a[j + 1] = a[j];
+            j--;
+        }
+        a[j + 1] = x;
+    }
 }
 void array::quick_sort(int l, int h)
 {
@@ -90,7 +102,7 @@ void array::quick_sort(int l, int h)
 }
 void array::merge(int l, int mid, int h)
 {
-    int *b = new int[get_length() - 1]{0};
+    int *b = new int[length]{0};
     int k = l;
     int i = l, j = mid + 1;
     while (i <= mid && j <= h)
@@ -112,7 +124,7 @@ void array::merge(int l, int mid, int h)
     {
         b[k++] = a[j++];
     }
-    for (int i = 0; i < get_length(); i++)
+    for (int i = 0; i < length; i++)
     {
         a[i] = b[i];
     }
@@ -177,7 +189,8 @@ int main()
     First.print_arr();
     // First.bubble_sort();
     // First.quick_sort(0, (First.get_length() - 1));
-    First.merge_sort(0, (First.get_length() - 1));
+    First.insertion_sort();
+    // First.merge_sort(0, (First.get_length() - 1));
     First.print_arr();
 
     return 0;
