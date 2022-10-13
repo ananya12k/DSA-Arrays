@@ -47,6 +47,15 @@ void array::print_arr()
         cout << a[i] << " ";
     }
 }
+void array::quick_sort(int l, int h)
+{
+    if (l < h)
+    {
+        int j = partition(l, h);
+        quick_sort(l, j - 1);
+        quick_sort(j + 1, h);
+    }
+}
 int array::partition(int l, int h)
 {
     int pivot = a[l];
@@ -91,15 +100,6 @@ void array::insertion_sort()
             j--;
         }
         a[j + 1] = x;
-    }
-}
-void array::quick_sort(int l, int h)
-{
-    if (l < h)
-    {
-        int j = partition(l, h);
-        quick_sort(l, j - 1);
-        quick_sort(j + 1, h);
     }
 }
 void array::merge(int l, int mid, int h)
