@@ -81,11 +81,11 @@ int array::partition(int l, int h)
 void array::insertion_sort()
 {
     int j;
-    for (int i = 1; i < length; i++)
+    for (int i = 1; i < length; i++) // Loop to perform passes
     {
         j = i - 1;
         int x = a[i];
-        while (j > -1 && a[j] > x)
+        while (j > -1 && a[j] > x) // loop to do shifting in each pass
         {
             a[j + 1] = a[j];
             j--;
