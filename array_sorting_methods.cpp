@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <cstdlib>
 using namespace std;
@@ -24,7 +25,6 @@ public:
     void selection_sort(); // lighter elements are brought to front
     void count_sort();
     void wave_sort();
-    void DNF_sort();
     void radix_sort(); // also known as bucket sort
 };
 int array::get_length()
@@ -158,6 +158,27 @@ void array::bubble_sort()
         }
     }
 }
+void array::selection_sort()
+{
+    for (int step = 0; step < length - 1; step++)
+    {
+        int min_idx = step;
+        for (int i = step + 1; i < size; i++)
+        {
+
+            // To sort in descending order, change > to < in this line.
+            // Select the minimum element in each loop.
+            if (a[i] < a[min_idx])
+                min_idx = i;
+        }
+
+        // put min at the correct position
+        int temp = a[step];
+        a[step] = a[min_idx];
+        a[min_idx] = temp;
+    }
+}
+
 array::array()
 {
     std::cout << "Constructor called" << endl;
