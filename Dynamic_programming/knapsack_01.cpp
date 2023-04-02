@@ -1,5 +1,3 @@
-// A dynamic programming based
-// solution for 0-1 Knapsack problem
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -43,5 +41,3 @@ int main()
 
     return 0;
 }
-
-// This code is contributed by Debojyoti Mandal
